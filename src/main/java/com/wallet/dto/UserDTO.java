@@ -5,7 +5,10 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.wallet.entity.User;
+import com.wallet.util.Bcrypt;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +19,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
+@JsonInclude(value = Include.NON_NULL)
 public class UserDTO {
 
 	private Long id;
@@ -36,7 +40,6 @@ public class UserDTO {
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
-		this.password = user.getPassword();
 		this.email = user.getEmail();
 	}
 	
@@ -44,7 +47,7 @@ public class UserDTO {
 		User user = new User();
 		user.setId(this.id);
 		user.setName(this.name);
-		user.setPassword(this.password);
+		user.setPassword(Bcrypt.getHash(this.password));
 		user.setEmail(this.email);
 		return user;
 	}

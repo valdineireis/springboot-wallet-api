@@ -1,10 +1,11 @@
 package com.wallet.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.wallet.response.Response;
 import com.wallet.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController {
 
 	@Autowired
@@ -24,7 +25,7 @@ public class UserController {
 	
 	@PostMapping
 	public ResponseEntity<Response<UserDTO>> create(
-			@Validated @RequestBody UserDTO dto, 
+			@Valid @RequestBody UserDTO dto, 
 			BindingResult result) {
 		
 		Response<UserDTO> response = new Response<UserDTO>();

@@ -44,10 +44,10 @@ class WalletItemRepositoryTest {
 		Wallet wallet = new Wallet();
 		wallet.setName("Carteira Teste");
 		wallet.setValue(BigDecimal.valueOf(250));
-		walletRepository.save(wallet);
+		wallet = walletRepository.save(wallet);
 		
 		WalletItem item = new WalletItem(1L, wallet, DATE, TYPE, DESCRIPTION, VALUE);
-		repository.save(item);
+		item = repository.save(item);
 
 		savedWalletId = wallet.getId();
 		savedWalletItemId = item.getId();

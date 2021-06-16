@@ -43,6 +43,8 @@ class UserWalletRepositoryTest {
 	@AfterEach
 	public void tearDown() {
 		repository.deleteAll();
+		walletRepository.deleteAll();
+		userRepository.deleteAll();
 	}
 	
 	@Test

@@ -3,6 +3,7 @@ package com.wallet.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,19 +31,29 @@ public class WalletItemServiceImpl implements WalletItemService {
 	}
 
 	@Override
-	public Page<WalletItem> findBetweenDates(long walletId, Date start, Date end, int page) {
+	public Page<WalletItem> findBetweenDates(Long walletId, Date start, Date end, int page) {
 		PageRequest pg = PageRequest.of(page, itemsPerPage);
 		return repository.findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(walletId, start, end, pg);
 	}
 
 	@Override
-	public List<WalletItem> findByWalletAndType(long walletId, TypeEnum type) {
+	public List<WalletItem> findByWalletAndType(Long walletId, TypeEnum type) {
 		return repository.findByWalletIdAndType(walletId, type);
 	}
 
 	@Override
-	public BigDecimal sumByWalletId(long walletId) {
+	public BigDecimal sumByWalletId(Long walletId) {
 		return repository.sumByWalletId(walletId);
+	}
+
+	@Override
+	public Optional<WalletItem> findById(Long walletId) {
+		return repository.findById(walletId);
+	}
+
+	@Override
+	public void deleteById(Long walletId) {
+		repository.deleteById(walletId);
 	}
 
 }

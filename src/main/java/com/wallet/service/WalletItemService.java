@@ -3,6 +3,7 @@ package com.wallet.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
@@ -13,9 +14,13 @@ public interface WalletItemService {
 
 	WalletItem save(WalletItem walletItem);
 
-	Page<WalletItem> findBetweenDates(long walletId, Date start, Date end, int page);
+	Page<WalletItem> findBetweenDates(Long walletId, Date start, Date end, int page);
 
-	List<WalletItem> findByWalletAndType(long walletId, TypeEnum type);
+	List<WalletItem> findByWalletAndType(Long walletId, TypeEnum type);
 
-	BigDecimal sumByWalletId(long walletId);
+	BigDecimal sumByWalletId(Long walletId);
+
+	Optional<WalletItem> findById(Long walletId);
+	
+	void deleteById(Long walletId);
 }

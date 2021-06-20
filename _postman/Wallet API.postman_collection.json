@@ -34,11 +34,21 @@
 		{
 			"name": "/wallet",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Carteira 03\",\r\n    \"value\": 100.5\r\n}",
+					"raw": "{\r\n    \"name\": \"Carteira Nova\",\r\n    \"value\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,6 +70,16 @@
 		{
 			"name": "/user-wallet",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -86,11 +106,21 @@
 		{
 			"name": "/wallet-item",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"wallet_id\": 8,\r\n    \"date\": \"20-06-2021\",\r\n    \"type\": \"ENTRADA\",\r\n    \"description\": \"Descrição 01\",\r\n    \"value\": 200.00\r\n}",
+					"raw": "{\r\n    \"wallet_id\": 8,\r\n    \"date\": \"23-06-2021\",\r\n    \"type\": \"ENTRADA\",\r\n    \"description\": \"Descrição 04\",\r\n    \"value\": 90\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,6 +142,16 @@
 		{
 			"name": "/wallet-item/{walletId}",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -144,6 +184,16 @@
 		{
 			"name": "/wallet-item/type/{walletId}",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -169,6 +219,16 @@
 		{
 			"name": "/wallet-item/total/{walletId}",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -188,6 +248,16 @@
 		{
 			"name": "/wallet-item",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -214,6 +284,16 @@
 		{
 			"name": "/wallet-item/{walletItemId}",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -224,6 +304,35 @@
 					"path": [
 						"wallet-item",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"token@teste.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth"
 					]
 				}
 			},

@@ -14,8 +14,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.wallet.security.JwtAuthenticationEntryPoint;
+import com.wallet.security.JwtAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -44,12 +46,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Bean
+	public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
+		return new JwtAuthenticationTokenFilter();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
 			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 			.antMatchers("/auth/**", "/configuration/security", "/webjars/**", "/user/**")
 			.permitAll().anyRequest().authenticated();
+		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		http.headers().cacheControl();
 	}
 }

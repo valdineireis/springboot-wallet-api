@@ -3,6 +3,7 @@ package com.wallet.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -155,6 +156,17 @@ class WalletItemRepositoryTest {
 		
 		assertEquals(1, response.size());
 		assertEquals(TypeEnum.SD, response.get(0).getType());
+	}
+	
+	@Test
+	public void testSumByWallet() {
+		Optional<Wallet> w = walletRepository.findById(savedWalletId);
+		
+		repository.save(new WalletItem(null, w.get(), DATE, TYPE, DESCRIPTION, BigDecimal.valueOf(150.80)));
+		
+		BigDecimal response = repository.sumByWalletId(savedWalletId);
+		
+		assertTrue(response.compareTo(BigDecimal.valueOf(215.80)) == 0);
 	}
 
 }

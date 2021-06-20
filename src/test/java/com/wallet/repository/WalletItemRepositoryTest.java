@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,7 @@ import com.wallet.util.enums.TypeEnum;
 @ActiveProfiles("test")
 class WalletItemRepositoryTest {
 
-	private static final LocalDateTime DATE = LocalDateTime.now();
+	private static final Date DATE = new Date();
 	private static final TypeEnum TYPE = TypeEnum.EN;
 	private static final String DESCRIPTION = "Conta de Luz";
 	private static final BigDecimal VALUE = BigDecimal.valueOf(65);
@@ -124,8 +126,10 @@ class WalletItemRepositoryTest {
 	public void testFindBetweenDates() {
 		Optional<Wallet> w = walletRepository.findById(savedWalletId);
 		
-		LocalDateTime currentDatePlusFiveDays = DATE.plusDays(5);
-		LocalDateTime currentDatePlusSevenDays = DATE.plusDays(7);
+		LocalDateTime localDateTime = DATE.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		
+		Date currentDatePlusFiveDays = Date.from(localDateTime.plusDays(5).atZone(ZoneId.systemDefault()).toInstant());
+		Date currentDatePlusSevenDays = Date.from(localDateTime.plusDays(7).atZone(ZoneId.systemDefault()).toInstant());
 		
 		repository.save(new WalletItem(null, w.get(), currentDatePlusFiveDays, TYPE, DESCRIPTION, VALUE));
 		repository.save(new WalletItem(null, w.get(), currentDatePlusSevenDays, TYPE, DESCRIPTION, VALUE));

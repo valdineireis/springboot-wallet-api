@@ -2,7 +2,7 @@ package com.wallet.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -40,7 +40,7 @@ public class WalletItem implements Serializable {
 	private Wallet wallet;
 	
 	@NotNull
-	private LocalDateTime date;
+	private Date date;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)

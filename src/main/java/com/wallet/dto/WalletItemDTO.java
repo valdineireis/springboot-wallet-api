@@ -1,7 +1,7 @@
 package com.wallet.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,7 +25,7 @@ public class WalletItemDTO {
 	private Long walletId;
 	
 	@NotNull(message = "Informe uma data")
-	private LocalDateTime date;
+	private Date date;
 	
 	@NotNull(message = "Informe um tipo")
 	@Pattern(regexp = "^(ENTRADA|SAÍDA)$", message = "Para o tipo somente são aceitos os valores ENTRADA ou SAÍDA")

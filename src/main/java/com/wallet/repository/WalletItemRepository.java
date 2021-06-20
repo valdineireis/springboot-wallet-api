@@ -1,7 +1,7 @@
 package com.wallet.repository;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import com.wallet.util.enums.TypeEnum;
 public interface WalletItemRepository extends JpaRepository<WalletItem, Long> {
 
 	Page<WalletItem> findAllByWalletIdAndDateGreaterThanEqualAndDateLessThanEqual(Long wallet,
-			LocalDateTime init, LocalDateTime end, Pageable page);
+			Date init, Date end, Pageable page);
 	
 	List<WalletItem> findByWalletIdAndType(Long wallet, TypeEnum type);
 

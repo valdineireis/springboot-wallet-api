@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -41,6 +42,7 @@ class WalletControllerTest {
 	MockMvc mvc;
 	
 	@Test
+	@WithMockUser
 	void testSave() throws Exception {
 		BDDMockito.given(service.save(Mockito.any(Wallet.class)))
 			.willReturn(getMockWallet());
@@ -54,6 +56,7 @@ class WalletControllerTest {
 	}
 	
 	@Test
+	@WithMockUser
 	public void testSaveInvalidWalletNullName() throws Exception {
 		getMvcPerformWallet(ID, null, BigDecimal.TEN)
 		.andExpect(status().isBadRequest())
@@ -61,6 +64,7 @@ class WalletControllerTest {
 	}
 	
 	@Test
+	@WithMockUser
 	public void testSaveInvalidWalletLengthName() throws Exception {
 		getMvcPerformWallet(ID, "AA", BigDecimal.TEN)
 		.andExpect(status().isBadRequest())
@@ -68,6 +72,7 @@ class WalletControllerTest {
 	}
 	
 	@Test
+	@WithMockUser
 	public void testSaveInvalidWalletNullValue() throws Exception {
 		getMvcPerformWallet(ID, NAME, null)
 		.andExpect(status().isBadRequest())

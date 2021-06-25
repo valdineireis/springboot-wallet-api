@@ -68,7 +68,7 @@ public class WalletItemController {
 		
 		Response<Page<WalletItemDTO>> response = new Response<Page<WalletItemDTO>>();
 		
-		Optional<UserWallet> uw = userWalletService.findByUserIdAndWalletId(Util.getAuthenticatedUserId(), wallet);
+		Optional<UserWallet> uw = userWalletService.findByUsersIdAndWalletId(Util.getAuthenticatedUserId(), wallet);
 		
 		if (! uw.isPresent()) {
 			response.getErrors().add("Você não tem acesso a essa carteira");

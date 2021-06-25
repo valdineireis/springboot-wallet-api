@@ -8,5 +8,5 @@ import com.wallet.entity.UserWallet;
 
 public interface UserWalletRepository extends JpaRepository<UserWallet, Long> {
 
-	Optional<UserWallet> findByUserIdAndWalletId(Long user, Long wallet);
+	Optional<UserWallet> findByUsersIdAndWalletId(Long user, Long wallet);
 }

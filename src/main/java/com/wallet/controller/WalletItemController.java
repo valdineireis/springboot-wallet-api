@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,8 @@ import com.wallet.util.enums.TypeEnum;
 @RestController
 @RequestMapping("wallet-item")
 public class WalletItemController {
+	
+	private static final Logger log = LoggerFactory.getLogger(WalletItemController.class);
 
 	@Autowired
 	private WalletItemService service;
@@ -85,6 +90,8 @@ public class WalletItemController {
 	public ResponseEntity<Response<List<WalletItemDTO>>> findByWalletIdAndType(
 			@PathVariable("wallet") Long wallet,
 			@RequestParam("type") String type) {
+		
+		log.info("Buscando por carteira {} e tipo {}", wallet, type);
 		
 		Response<List<WalletItemDTO>> response = new Response<List<WalletItemDTO>>();
 		List<WalletItem> list = service.findByWalletAndType(wallet, TypeEnum.getEnum(type));
